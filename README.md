@@ -1,91 +1,92 @@
-# Magic Portfolio
+# coolbao2026 — 我的项目墙 (Project Wall)
 
-Magic Portfolio is a simple, clean, beginner-friendly portfolio template. It supports an MDX-based content system for projects and blog posts, an about / CV page and a gallery.
+个人作品 / 项目展示站。前端用 **magic-portfolio**（Next.js 16 + Once UI），内容后台用 **TinaCMS**（Git-backed，本地直接读写 MDX，无需云账号）。
 
-View the demo [here](https://demo.magic-portfolio.com).
+## 架构
 
-![Magic Portfolio](public/images/og/home.jpg)
-
-## Getting started
-
-**1. Clone the repository**
 ```
-git clone https://github.com/once-ui-system/magic-portfolio.git
-```
-
-**2. Install dependencies**
-```
-npm install
+浏览器  ──►  http://localhost:7931            前端展示（magic-portfolio）
+浏览器  ──►  http://localhost:7931/admin       TinaCMS 内容后台
+                    │
+                    ▼
+        src/app/work/projects/*.mdx   ← 「项目 Projects」collection
+        src/app/blog/posts/*.mdx      ← 「博客 Blog」collection
 ```
 
-**3. Run dev server**
-```
-npm run dev
-```
+TinaCMS 在 `/admin` 提供可视化编辑器，保存时直接写回上面这些 MDX 文件并提交到本地 Git。magic-portfolio 在构建/请求时从同样的文件读取渲染——**同一份内容，两个视角**。
 
-**4. Edit config**
-```
-src/resources/once-ui.config.js
-```
+## 端口
 
-**5. Edit content**
-```
-src/resources/content.js
+固定使用 **7931**（793x 系列，避免冲突）。TinaCMS 自身的 GraphQL 数据层跑在 `:4001`（由 CLI 内部管理）。
+
+## 开发
+
+```bash
+npm install          # 仅首次
+npm run dev          # tinacms dev -c "next dev -p 7931"
 ```
 
-**6. Create blog posts / projects**
+- 前台：http://localhost:7931
+- 后台：http://localhost:7931/admin
+
+`npm run dev` 会同时启动 TinaCMS（生成 schema + admin SPA）和 Next。
+若只想跑纯前端不带 CMS：`npm run dev:next`。
+
+## 内容管理（日常维护流程）
+
+1. 打开 http://localhost:7931/admin
+2. 选择「项目 Projects」或「博客 Blog」
+3. 新建 / 编辑 / 删除条目，可视化填写标题、日期、封面图、正文（富文本）
+4. 保存 → 自动写入对应 `.mdx` 文件并 commit 到本地 git
+5. 前台立即热更新
+
+### 字段映射
+
+**项目 Projects** (`src/app/work/projects/*.mdx`)
+
+| 后台字段 | frontmatter key |
+|---|---|
+| 标题 | `title` |
+| 发布日期 | `publishedAt` |
+| 摘要 | `summary` |
+| 图片(多张) | `images[]` |
+| 团队 | `team[]` (name/role/avatar/linkedIn) |
+| 外部链接 | `link` |
+| 正文 | MDX body |
+
+**博客 Blog** (`src/app/blog/posts/*.mdx`)
+
+| 后台字段 | frontmatter key |
+|---|---|
+| 标题 | `title` |
+| 副标题 | `subtitle` |
+| 摘要 | `summary` |
+| 封面图 | `image` |
+| 发布日期 | `publishedAt` |
+| 标签 | `tag` |
+| 正文 | MDX body |
+
+## 站点信息（个人资料 / 社交链接）
+
+这些是代码配置（含 JSX），不在 TinaCMS 里，直接改文件：
+- `src/resources/content.tsx` — 姓名、角色、头像、邮箱、社交链接、首页文案等
+- `src/resources/once-ui.config.ts` — 主题、配色、字体
+
+## 构建 / 生产
+
+```bash
+npm run build        # tinacms build && next build
+npm run start        # next start -p 7931
 ```
-Add a new .mdx file to src/app/blog/posts or src/app/work/projects
-```
 
-Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.
+## 接入 Tina Cloud（可选，未来需要远程协作时）
 
-## Documentation
+默认本地模式无需账号。若要团队远程编辑：在 https://app.tina.io 创建项目，把 `clientId` / `token` 填入 `.env.local`（`NEXT_PUBLIC_TINA_CLIENT_ID`、`TINA_TOKEN`），并设置 `NEXT_PUBLIC_TINA_BRANCH`。
 
-Docs available at: [docs.once-ui.com](https://docs.once-ui.com/docs/magic-portfolio/quick-start)
+## 媒体
 
-## Features
+图片上传到 `public/images/`（TinaCMS media root）。也可手动放入该目录。
 
-### Once UI
-- All tokens, components & features of [Once UI](https://once-ui.com)
+---
 
-### SEO
-- Automatic open-graph and X image generation with next/og
-- Automatic schema and metadata generation based on the content file
-
-### Design
-- Responsive layout optimized for all screen sizes
-- Timeless design without heavy animations and motion
-- Endless customization options through [data attributes](https://once-ui.com/docs/theming)
-
-### Content
-- Render sections conditionally based on the content file
-- Enable or disable pages for blog, work, gallery and about / CV
-- Generate and display social links automatically
-- Set up password protection for URLs
-
-### Localization
-- A localized, earlier version of Magic Portfolio is available with the next-intl library
-- To use localization, switch to the 'i18n' branch
-
-## Creators
-
-Lorant One: [Threads](https://www.threads.net/@lorant.one) / [LinkedIn](https://www.linkedin.com/in/lorant-one/)
-
-## Get involved
-
-- Join the Design Engineers Club on [Discord](https://discord.com/invite/5EyAQ4eNdS) and share your project with us!
-- Deployed your docs? Share it on the [Once UI Hub](https://once-ui.com/hub) too! We feature our favorite apps on our landing page.
-
-## License
-
-Distributed under the CC BY-NC 4.0 License.
-- Attribution is required.
-- Commercial usage is not allowed.
-- You can extend the license to [Dopler CC](https://dopler.app/license) by purchasing a [Once UI Pro](https://once-ui.com/pricing) license.
-
-See `LICENSE.txt` for more information.
-
-## Deploy with Vercel
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&project-name=portfolio&repository-name=portfolio&redirect-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&demo-title=Magic%20Portfolio&demo-description=Showcase%20your%20designers%20or%20developer%20portfolio&demo-url=https%3A%2F%2Fdemo.magic-portfolio.com&demo-image=%2F%2Fraw.githubusercontent.com%2Fonce-ui-system%2Fmagic-portfolio%2Fmain%2Fpublic%2Fimages%2Fog%2Fhome.jpg)
+基底模板：[magic-portfolio](https://github.com/once-ui-system/magic-portfolio) (CC BY-NC 4.0) · CMS：[TinaCMS](https://github.com/tinacms/tinacms)

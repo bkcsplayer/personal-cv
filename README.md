@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src=".github/assets/banner.svg" alt="Cool bao — Personal CV & Project Wall" width="100%" />
+<img src=".github/assets/banner.png" alt="Cool bao — Personal CV & Project Wall" width="100%" />
 
 <br/>
 
@@ -16,7 +16,7 @@ Frontend powered by [Magic Portfolio](https://github.com/once-ui-system/magic-po
 
 </div>
 
-<img src=".github/assets/divider.svg" alt="" width="100%" />
+<img src=".github/assets/divider.png" alt="" width="100%" />
 
 ## Overview
 
@@ -29,7 +29,7 @@ This is a developer portfolio built as a **living project wall**. The twist: ins
 - **Git-native workflow** — every edit is a commit; push to deploy.
 - **Zero-config deploys** — ships to Vercel out of the box.
 
-<img src=".github/assets/divider.svg" alt="" width="100%" />
+<img src=".github/assets/divider.png" alt="" width="100%" />
 
 ## Live Preview
 
@@ -60,7 +60,7 @@ This is a developer portfolio built as a **living project wall**. The twist: ins
   </tr>
 </table>
 
-<img src=".github/assets/divider.svg" alt="" width="100%" />
+<img src=".github/assets/divider.png" alt="" width="100%" />
 
 ## Architecture
 
@@ -96,7 +96,7 @@ flowchart LR
 
 The public site and the CMS are the **same Next.js app**. TinaCMS doesn't store content in a database — it reads and writes the very MDX files that the frontend renders. That keeps everything in Git and makes deploys deterministic.
 
-<img src=".github/assets/divider.svg" alt="" width="100%" />
+<img src=".github/assets/divider.png" alt="" width="100%" />
 
 ## Editing Content via `/admin`
 
@@ -169,7 +169,7 @@ sequenceDiagram
 
 The collection schema lives in [`tina/config.ts`](tina/config.ts).
 
-<img src=".github/assets/divider.svg" alt="" width="100%" />
+<img src=".github/assets/divider.png" alt="" width="100%" />
 
 ## Deployment on Vercel
 
@@ -190,7 +190,7 @@ vercel --prod     # production
 
 > **Going multi-user / remote editing?** Local mode edits the filesystem on the machine running `npm run dev`. To let editors update content from anywhere (and from the production `/admin`), connect a free [Tina Cloud](https://app.tina.io) project and set `NEXT_PUBLIC_TINA_CLIENT_ID`, `TINA_TOKEN`, and `NEXT_PUBLIC_TINA_BRANCH` in your Vercel env vars.
 
-<img src=".github/assets/divider.svg" alt="" width="100%" />
+<img src=".github/assets/divider.png" alt="" width="100%" />
 
 ## Tech Stack
 
@@ -203,7 +203,7 @@ vercel --prod     # production
 | CMS | TinaCMS 3 (Git-backed, local mode) |
 | Hosting | Vercel |
 
-<img src=".github/assets/divider.svg" alt="" width="100%" />
+<img src=".github/assets/divider.png" alt="" width="100%" />
 
 ## Getting Started
 
@@ -231,7 +231,7 @@ npm run start      # serve production build on :7931
 
 > Ports use the **793x** range to avoid local conflicts.
 
-<img src=".github/assets/divider.svg" alt="" width="100%" />
+<img src=".github/assets/divider.png" alt="" width="100%" />
 
 ## Project Structure
 
@@ -255,7 +255,7 @@ npm run start      # serve production build on :7931
 
 **To make it yours:** edit your identity (name, role, socials, intro) in [`src/resources/content.tsx`](src/resources/content.tsx), tweak theme and `baseURL` in [`src/resources/once-ui.config.ts`](src/resources/once-ui.config.ts), then manage projects & posts from `/admin`.
 
-<img src=".github/assets/divider.svg" alt="" width="100%" />
+<img src=".github/assets/divider.png" alt="" width="100%" />
 
 ## Credits
 

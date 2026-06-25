@@ -1,4 +1,4 @@
-import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
+import type { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
 import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
@@ -6,7 +6,7 @@ const person: Person = {
   lastName: "bao",
   name: `Cool bao`,
   role: "Full-Stack Developer",
-  avatar: "/images/avatar.jpg",
+  avatar: "/images/touxiang-cool.png",
   email: "bkcsplayer@gmail.com",
   location: "America/Edmonton", // Calgary, Canada (Mountain Time). IANA tz id.
   languages: ["English", "中文"], // optional: Leave the array empty if you don't want to display languages
@@ -77,8 +77,8 @@ const home: Home = {
   },
   subline: (
     <>
-      I'm {person.firstName}, a {person.role.toLowerCase()} based in Calgary. By day I build
-      web apps; <br /> after hours I ship my own projects — this is where they live.
+      I'm {person.firstName}, a {person.role.toLowerCase()} based in Calgary. By day I build web
+      apps; <br /> after hours I ship my own projects — this is where they live.
     </>
   ),
 };
@@ -104,9 +104,9 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        {person.name} is a Calgary-based {person.role.toLowerCase()} who enjoys turning ideas
-        into working products. This is a living wall of the projects I build and the things I
-        write about along the way — from web apps to side experiments.
+        {person.name} is a Calgary-based {person.role.toLowerCase()} who enjoys turning ideas into
+        working products. This is a living wall of the projects I build and the things I write about
+        along the way — from web apps to side experiments.
       </>
     ),
   },
@@ -123,9 +123,7 @@ const about: About = {
             Placeholder achievement — describe what you built and the impact it had. Edit in
             src/resources/content.tsx.
           </>,
-          <>
-            Placeholder achievement — highlight a launch, optimization, or feature you shipped.
-          </>,
+          <>Placeholder achievement — highlight a launch, optimization, or feature you shipped.</>,
         ],
         images: [
           // optional: leave the array empty if you don't want to display images
@@ -142,12 +140,8 @@ const about: About = {
         timeframe: "2018 - 2022",
         role: "Developer",
         achievements: [
-          <>
-            Placeholder achievement — add a previous role and what you delivered there.
-          </>,
-          <>
-            Placeholder achievement — quantify results where you can.
-          </>,
+          <>Placeholder achievement — add a previous role and what you delivered there.</>,
+          <>Placeholder achievement — quantify results where you can.</>,
         ],
         images: [],
       },
@@ -173,9 +167,7 @@ const about: About = {
     skills: [
       {
         title: "Figma",
-        description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
-        ),
+        description: <>Able to prototype in Figma with Once UI with unnatural speed.</>,
         tags: [
           {
             name: "Figma",
@@ -200,9 +192,7 @@ const about: About = {
       },
       {
         title: "Next.js",
-        description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
-        ),
+        description: <>Building next gen apps with Next.js + Once UI + Supabase.</>,
         tags: [
           {
             name: "JavaScript",

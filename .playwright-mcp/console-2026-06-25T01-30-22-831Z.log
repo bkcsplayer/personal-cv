@@ -1,0 +1,22 @@
+[     264ms] [WARNING] Removing intrinsics.%MapPrototype%.getOrInsert @ chrome-extension://agoakfejjabomempkjlepdflaleeobhb/cs/js/contentscript.js:9264
+[     264ms] [WARNING] Removing intrinsics.%MapPrototype%.getOrInsertComputed @ chrome-extension://agoakfejjabomempkjlepdflaleeobhb/cs/js/contentscript.js:9264
+[     265ms] [WARNING] Removing intrinsics.%WeakMapPrototype%.getOrInsert @ chrome-extension://agoakfejjabomempkjlepdflaleeobhb/cs/js/contentscript.js:9264
+[     265ms] [WARNING] Removing intrinsics.%WeakMapPrototype%.getOrInsertComputed @ chrome-extension://agoakfejjabomempkjlepdflaleeobhb/cs/js/contentscript.js:9264
+[     265ms] [WARNING] Removing intrinsics.%DatePrototype%.toTemporalInstant @ chrome-extension://agoakfejjabomempkjlepdflaleeobhb/cs/js/contentscript.js:9264
+[    1056ms] [WARNING] MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added. Use emitter.setMaxListeners() to increase limit @ chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/contentscript.js:14082
+[    1057ms] [WARNING] MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 end listeners added. Use emitter.setMaxListeners() to increase limit @ chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/contentscript.js:14082
+[    1105ms] TypeError: Cannot redefine property: ethereum
+    at Object.defineProperty (<anonymous>)
+    at r.inject (chrome-extension://bfnaelmomeimhlpmgjnjophhpkkoljpa/evmAsk.js:15:5093)
+    at Lv.window.addEventListener.once (chrome-extension://bfnaelmomeimhlpmgjnjophhpkkoljpa/evmAsk.js:15:9013)
+[    1105ms] [WARNING] ObjectMultiplex - orphaned data for stream "app-init-liveness" @ chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/contentscript.js:14082
+[    1106ms] [WARNING] ObjectMultiplex - orphaned data for stream "app-init-liveness" @ chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/contentscript.js:14082
+[    1107ms] [WARNING] ObjectMultiplex - orphaned data for stream "background-liveness" @ chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/contentscript.js:14082
+[    1107ms] [WARNING] ObjectMultiplex - orphaned data for stream "background-liveness" @ chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/contentscript.js:14082
+[    1108ms] [WARNING] ObjectMultiplex - malformed chunk without name "[object Object]" @ chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/contentscript.js:14082
+[    1108ms] [WARNING] ObjectMultiplex - malformed chunk without name "[object Object]" @ chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/contentscript.js:14082
+[    1204ms] [LOG] MetaMask: Connected to chain with ID "0xaa36a7". @ chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/inpage.js:1
+[    3387ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:7931/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    3513ms] NotFoundError: Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.
+    at e (chrome-extension://hoklmmgfnpapgjgcpechhaamimifchmp/frame_start/frame_start.js:2:9232)
+    at t.onload (chrome-extension://hoklmmgfnpapgjgcpechhaamimifchmp/frame_start/frame_start.js:2:9320)

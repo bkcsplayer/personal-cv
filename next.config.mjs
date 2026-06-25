@@ -9,6 +9,16 @@ const withMDX = mdx({
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   transpilePackages: ["next-mdx-remote"],
+  // TinaCMS admin is a static SPA at /admin/index.html — let bare /admin reach it.
+  async redirects() {
+    return [
+      {
+        source: "/admin",
+        destination: "/admin/index.html",
+        permanent: false,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

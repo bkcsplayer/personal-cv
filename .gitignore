@@ -38,3 +38,5 @@ next-env.d.ts
 # tinacms (generated client/types + built admin SPA are regenerated on dev/build)
 /public/admin
 /tina/__generated__
+# playwright mcp logs
+/.playwright-mcp

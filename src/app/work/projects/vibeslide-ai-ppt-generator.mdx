@@ -1,0 +1,41 @@
+---
+title: "VibeSlide — AI PPT Generation with Glassmorphism UI"
+publishedAt: "2025-02-20"
+summary: "AI-powered presentation generation app with ultra-modern Glassmorphism UI. Supports idea/outline/page-description input modes, multi-format file upload (PDF/Docx/MD), natural language editing, and PPTX/PDF export."
+images: []
+team:
+  - name: "Cool Bao"
+    role: "Full-Stack Developer"
+    avatar: "/images/touxiang-cool.png"
+    linkedIn: "https://github.com/bkcsplayer"
+link: "https://fftppthelper.khtain.com"
+---
+
+## Overview
+
+VibeSlide is an AI-powered presentation generator that transforms ideas into polished slide decks in minutes. The app features a distinctive Glassmorphism design language — translucent panels, blurred backdrops, and gradient accents — creating a premium, modern aesthetic. Users can generate presentations from a single idea, a structured outline, or detailed page-by-page descriptions. The AI engine (Google Gemini via OpenRouter) handles content generation, slide structuring, and natural language editing.
+
+## Key Features
+
+- **Three Generation Modes**: (1) Idea Mode — enter a topic and get a full presentation, (2) Outline Mode — provide a structured outline for finer control, (3) Page Description Mode — describe each slide individually for maximum precision.
+- **Multi-Format Upload**: Upload PDF, DOCX, or Markdown files as source material. The AI extracts and synthesizes content from uploaded documents into presentation format.
+- **Natural Language Editing**: After generation, edit any slide by describing changes in plain English — "make this slide more data-driven" or "add a comparison table."
+- **Glassmorphism UI**: Every component — modals, cards, buttons, navigation — uses the Glassmorphism visual language with backdrop-filter blur, semi-transparent backgrounds, and gradient borders. Supports both light and dark themes.
+- **PPTX & PDF Export**: Export to native PowerPoint (.pptx) format via python-pptx, or PDF for sharing. Preserves layout, images, and typography.
+- **Slide Management**: Reorder, delete, duplicate, or merge slides. Real-time preview of the full deck.
+
+## Tech Stack
+
+- **Frontend**: React 18, TypeScript, Vite 5, TailwindCSS, Zustand state management
+- **Backend**: Flask, SQLAlchemy, SQLite
+- **AI**: Google Gemini API, OpenRouter
+- **Document Generation**: python-pptx, WeasyPrint
+- **Infrastructure**: Docker Compose (2 services), uv package manager
+
+## Deployment
+
+Docker Compose on VPS, served at `fftppthelper.khtain.com`. Two-container setup: frontend (port 7000) + backend (port 7001).
+
+## Outcome
+
+VibeSlide reduces presentation creation time from hours to minutes. The Glassmorphism UI has become a signature design language reused across other FFT projects. The tool was forked from the open-source banana-slides project and significantly enhanced with multi-mode generation, file upload, and natural language editing.

@@ -3,48 +3,29 @@ import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
   firstName: "Cool",
-  lastName: "bao",
-  name: `Cool bao`,
-  role: "Full-Stack Developer",
+  lastName: "Bao",
+  name: "Cool Bao",
+  role: "Full-Stack Developer & Entrepreneur",
   avatar: "/images/touxiang-cool.png",
   email: "bkcsplayer@gmail.com",
   location: "America/Edmonton", // Calgary, Canada (Mountain Time). IANA tz id.
-  languages: ["English", "中文"], // optional: Leave the array empty if you don't want to display languages
-  locale: "en", // BCP 47 language tag for the HTML lang attribute, e.g., 'en', 'ja', 'zh-TW'
+  languages: ["English", "中文"],
+  locale: "en",
 };
 
 const newsletter: Newsletter = {
   display: true,
   title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: <>My weekly newsletter about creativity and engineering</>,
+  description: (
+    <>Stay updated on new projects, technical deep-dives, and lessons from the trenches.</>
+  ),
 };
 
 const social: Social = [
-  // Links are automatically displayed.
-  // Import new icons in /once-ui/icons.ts
-  // Set essentials: true for links you want to show on the about page
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/coolbao",
-    essential: true,
-  },
-  {
-    name: "LinkedIn",
-    icon: "linkedin",
-    link: "https://www.linkedin.com/in/coolbao/",
-    essential: true,
-  },
-  {
-    name: "Instagram",
-    icon: "instagram",
-    link: "https://www.instagram.com/coolbao/",
-    essential: false,
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@coolbao",
+    link: "https://github.com/bkcsplayer",
     essential: true,
   },
   {
@@ -61,24 +42,27 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building things worth showing</>,
+  headline: <>Building the future, one repo at a time</>,
   featured: {
     display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Cool bao</strong>{" "}
+        <strong className="ml-4">Cool Bao</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
           Featured work
         </Text>
       </Row>
     ),
-    href: "/work/building-once-ui-a-customizable-design-system",
+    href: "/work/frontierx-web3-ai-platform",
   },
   subline: (
     <>
-      I'm {person.firstName}, a {person.role.toLowerCase()} based in Calgary. By day I build web
-      apps; <br /> after hours I ship my own projects — this is where they live.
+      I'm {person.firstName}, a {person.role.toLowerCase()} based in Calgary, Canada.
+      <br />
+      Founder of FutureFrontier Technology Ltd and Khtain Block Technology Ltd.
+      <br />I build production SaaS, Web3 platforms, AI pipelines, and trading systems — this is
+      where they live.
     </>
   ),
 };
@@ -104,118 +88,182 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        {person.name} is a Calgary-based {person.role.toLowerCase()} who enjoys turning ideas into
-        working products. This is a living wall of the projects I build and the things I write about
-        along the way — from web apps to side experiments.
+        I'm Cool Bao, a Calgary-based Full-Stack Developer and Entrepreneur. I build
+        production-grade SaaS tools, Web3 platforms, AI pipelines, and automated trading systems. As
+        founder of FutureFrontier Technology Ltd and Khtain Block Technology Ltd, I ship products
+        that solve real business problems — from EV charger quoting to solar CRM, from AI content
+        factories to prediction market trading engines. This site is the living wall of everything I
+        build.
       </>
     ),
   },
   work: {
-    display: true, // set to false to hide this section
+    display: true,
     title: "Work Experience",
     experiences: [
       {
-        company: "Your Company",
-        timeframe: "2022 - Present",
-        role: "Full-Stack Developer",
+        company: "FutureFrontier Technology Ltd / Khtain Block Technology Ltd",
+        timeframe: "2023 - Present",
+        role: "Founder & Full-Stack Developer",
         achievements: [
           <>
-            Placeholder achievement — describe what you built and the impact it had. Edit in
-            src/resources/content.tsx.
+            Designed and deployed 15+ production web applications across solar, EV, finance, AI, and
+            Web3 domains, serving real business clients on a single VPS infrastructure.
           </>,
-          <>Placeholder achievement — highlight a launch, optimization, or feature you shipped.</>,
-        ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },
-      {
-        company: "Previous Company",
-        timeframe: "2018 - 2022",
-        role: "Developer",
-        achievements: [
-          <>Placeholder achievement — add a previous role and what you delivered there.</>,
-          <>Placeholder achievement — quantify results where you can.</>,
+          <>
+            Architected Docker-based hosting on a single VPS running 10+ projects with Nginx reverse
+            proxy, serving 15+ domains under the khtain.com namespace.
+          </>,
+          <>
+            Built enterprise SaaS tools: EV charger quoting system, solar installation CRM with PDF
+            invoicing, drone media management platform, and digital safety workflow for solar teams.
+          </>,
+          <>
+            Developed FrontierX Web3 — a full-stack Web3+AI platform with ERC-20/721 smart
+            contracts, staking, lottery, and AI hub deployed on Ethereum Sepolia testnet.
+          </>,
+          <>
+            Created VibeSlide — an AI-powered PPT generation tool with Glassmorphism UI, and
+            BioWeaver — an AI-powered biographical narrative platform for elderly storytellers.
+          </>,
         ],
         images: [],
       },
     ],
   },
   studies: {
-    display: true, // set to false to hide this section
-    title: "Studies",
+    display: true,
+    title: "Education & Learning",
     institutions: [
       {
-        name: "Your University",
-        description: <>Studied software engineering. (Edit in src/resources/content.tsx)</>,
+        name: "Self-Taught Engineer",
+        description: (
+          <>
+            Continuous self-directed learning across full-stack web development (React, Next.js,
+            FastAPI, Node.js), blockchain (Solidity, Web3), AI/ML (LLM pipelines, RAG, embeddings),
+            DevOps (Docker, Nginx, VPS management), and quantitative trading. Built 60+ GitHub
+            repositories and 30+ production projects as the primary learning method.
+          </>
+        ),
       },
       {
-        name: "Self-taught / Online",
-        description: <>Continuously learning new tools and shipping side projects.</>,
+        name: "Open Source Contributor",
+        description: (
+          <>
+            Published npm packages (text measurement/layout library), Claude Code plugin for web
+            novel writing, and Claude Code configuration collections. Active on GitHub with
+            contributions across the TypeScript/JavaScript ecosystem.
+          </>
+        ),
       },
     ],
   },
   technical: {
-    display: true, // set to false to hide this section
-    title: "Technical skills",
+    display: true,
+    title: "Technical Skills",
     skills: [
       {
-        title: "Figma",
-        description: <>Able to prototype in Figma with Once UI with unnatural speed.</>,
+        title: "Full-Stack Web",
+        description: (
+          <>
+            React 19, Next.js 16, TypeScript, Node.js, Express, FastAPI, Vue 3, Go (Gin). Building
+            everything from marketing sites to enterprise dashboards.
+          </>
+        ),
         tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
+          { name: "TypeScript", icon: "typescript" },
+          { name: "React", icon: "react" },
+          { name: "Next.js", icon: "nextjs" },
+          { name: "Vue", icon: "vuedotjs" },
+          { name: "Node.js", icon: "nodejs" },
+          { name: "Python", icon: "python" },
+          { name: "Go", icon: "go" },
         ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        title: "Next.js",
-        description: <>Building next gen apps with Next.js + Once UI + Supabase.</>,
+        title: "AI & Machine Learning",
+        description: (
+          <>
+            Claude API, Google Gemini, OpenRouter multi-model routing, OpenAI Whisper transcription,
+            pgvector + RAG semantic search, K-Means clustering, Bayesian probability models. Built
+            AI pipelines for knowledge distillation, content generation, receipt OCR, and trading
+            signal analysis.
+          </>
+        ),
         tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-          {
-            name: "Supabase",
-            icon: "supabase",
-          },
+          { name: "Claude", icon: "rocket" },
+          { name: "Gemini", icon: "rocket" },
+          { name: "Python", icon: "python" },
+          { name: "FastAPI", icon: "javascript" },
         ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
+        images: [],
+      },
+      {
+        title: "Web3 & Blockchain",
+        description: (
+          <>
+            Solidity smart contracts (ERC-20, ERC-721), Hardhat development framework, OpenZeppelin
+            libraries, wagmi + RainbowKit frontend integration. 5+ contracts deployed on Ethereum
+            Sepolia testnet with verified source code.
+          </>
+        ),
+        tags: [
+          { name: "Solidity", icon: "ethereum" },
+          { name: "Ethereum", icon: "ethereum" },
+          { name: "Hardhat", icon: "javascript" },
         ],
+        images: [],
+      },
+      {
+        title: "DevOps & Infrastructure",
+        description: (
+          <>
+            Docker Compose multi-service orchestration, Nginx reverse proxy (20+ domains on single
+            VPS), PM2 process management, Tailscale mesh networking (VPS + NAS + N305 server + dev
+            PC), Baota Panel server administration.
+          </>
+        ),
+        tags: [
+          { name: "Docker", icon: "docker" },
+          { name: "Nginx", icon: "nginx" },
+          { name: "Linux", icon: "linux" },
+          { name: "Git", icon: "git" },
+        ],
+        images: [],
+      },
+      {
+        title: "Database & Storage",
+        description: (
+          <>
+            PostgreSQL (15/16) with Alembic migrations and TimescaleDB for time-series data. Redis
+            for caching and Celery task queues. SQLite for lightweight embedded databases. Synology
+            NAS integration via FileStation API.
+          </>
+        ),
+        tags: [
+          { name: "PostgreSQL", icon: "postgres" },
+          { name: "Redis", icon: "docker" },
+          { name: "SQLite", icon: "javascript" },
+        ],
+        images: [],
+      },
+      {
+        title: "Design & Tools",
+        description: (
+          <>
+            TailwindCSS + shadcn/ui for rapid UI development, Once UI design system, Figma
+            prototyping, TinaCMS for Git-backed content management. Biome for code formatting, Husky
+            + lint-staged for pre-commit quality gates.
+          </>
+        ),
+        tags: [
+          { name: "Tailwind", icon: "tailwind" },
+          { name: "Figma", icon: "figma" },
+          { name: "HTML5", icon: "html5" },
+          { name: "CSS3", icon: "css3" },
+        ],
+        images: [],
       },
     ],
   },
@@ -224,19 +272,15 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about design and tech...",
-  description: `Read what ${person.name} has been up to recently`,
-  // Create new blog posts by adding a new .mdx file to app/blog/posts
-  // All posts will be listed on the /blog route
+  title: "Writing about code, infrastructure, and shipping products",
+  description: `Read what ${person.name} has been working on — technical deep-dives, project retrospectives, and lessons learned.`,
 };
 
 const work: Work = {
   path: "/work",
   label: "Work",
   title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`,
-  // Create new project pages by adding a new .mdx file to app/blog/posts
-  // All projects will be listed on the /home and /work routes
+  description: `Design and development projects by ${person.name} — SaaS tools, Web3 platforms, AI pipelines, and trading systems.`,
 };
 
 const gallery: Gallery = {
@@ -244,47 +288,45 @@ const gallery: Gallery = {
   label: "Gallery",
   title: `Photo gallery – ${person.name}`,
   description: `A photo collection by ${person.name}`,
-  // Images by https://lorant.one
-  // These are placeholder images, replace with your own
   images: [
     {
       src: "/images/gallery/horizontal-1.jpg",
-      alt: "image",
+      alt: "Workspace setup",
       orientation: "horizontal",
     },
     {
       src: "/images/gallery/vertical-4.jpg",
-      alt: "image",
+      alt: "Code on screen",
       orientation: "vertical",
     },
     {
       src: "/images/gallery/horizontal-3.jpg",
-      alt: "image",
+      alt: "Server rack",
       orientation: "horizontal",
     },
     {
       src: "/images/gallery/vertical-1.jpg",
-      alt: "image",
+      alt: "Development environment",
       orientation: "vertical",
     },
     {
       src: "/images/gallery/vertical-2.jpg",
-      alt: "image",
+      alt: "Terminal session",
       orientation: "vertical",
     },
     {
       src: "/images/gallery/horizontal-2.jpg",
-      alt: "image",
+      alt: "Dashboard view",
       orientation: "horizontal",
     },
     {
       src: "/images/gallery/horizontal-4.jpg",
-      alt: "image",
+      alt: "Infrastructure diagram",
       orientation: "horizontal",
     },
     {
       src: "/images/gallery/vertical-3.jpg",
-      alt: "image",
+      alt: "Project architecture",
       orientation: "vertical",
     },
   ],

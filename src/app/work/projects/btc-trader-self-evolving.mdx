@@ -1,0 +1,38 @@
+---
+title: "BTC Self-Evolving Contract Trading Engine"
+publishedAt: "2024-11-05"
+summary: "BTC-only self-evolving trading system with Phase 0 infrastructure: data collection pipelines, comprehensive backtesting framework, 'Hermes' strategy evolution engine, and dry-run paper trading. Live trading disabled by default."
+images: []
+team:
+  - name: "Cool Bao"
+    role: "Full-Stack Developer"
+    avatar: "/images/touxiang-cool.png"
+    linkedIn: "https://github.com/bkcsplayer"
+---
+
+## Overview
+
+The BTC Trader v1.0 is a self-evolving contract trading system designed exclusively for Bitcoin perpetual futures. The core innovation is the "Hermes" evolution engine — a feedback loop where trading strategies are evaluated, mutated, and re-tested automatically. Phase 0 (completed) established the complete infrastructure: data collection, backtesting, and dry-run execution. Live trading is gated behind explicit manual activation.
+
+## Key Features
+
+- **Data Collection Pipeline**: Multi-source data ingestion from exchange APIs (Binance, Bybit). OHLCV candlestick data stored in TimescaleDB for efficient time-series queries. Order book snapshots for depth analysis.
+- **Comprehensive Backtesting Framework**: Historical replay with realistic slippage and fee modeling. Multi-timeframe strategy testing (1m, 5m, 15m, 1h, 4h, 1d). Performance metrics: Sharpe ratio, max drawdown, win rate, profit factor, Calmar ratio.
+- **Hermes Evolution Engine**: Genetic algorithm that mutates strategy parameters (entry thresholds, stop-loss levels, take-profit targets, indicator periods). Top-performing strategies survive to the next generation. Evolution runs on historical data before any live deployment.
+- **Dry Run Mode**: Paper trading against live market data with simulated order execution. Performance tracking identical to live mode. Serves as the final validation gate before live activation.
+- **Jupyter Integration**: Full JupyterLab environment for ad-hoc analysis, strategy prototyping, and visualization. Direct access to the TimescaleDB database for custom queries.
+
+## Tech Stack
+
+- **Backend**: FastAPI, SQLAlchemy, Celery workers, Python data science stack (NumPy, Pandas, TA-Lib)
+- **Database**: TimescaleDB (time-series optimized PostgreSQL 16), Redis 7
+- **Frontend**: Next.js 14, TypeScript, TailwindCSS, Recharts
+- **Infrastructure**: Docker Compose (19 containers total), N305 home server
+
+## Deployment
+
+Deployed on N305 home server as a 19-container Docker Compose stack including: API server, database, Redis, frontend, Jupyter, data collectors, strategy workers, and monitoring services. The system is accessible via Tailscale mesh network for secure remote management.
+
+## Outcome
+
+Phase 0 established a robust foundation for systematic trading. The backtesting framework evaluated 1,000+ strategy variations through Hermes evolution, identifying several promising candidates for Phase 1 live deployment.

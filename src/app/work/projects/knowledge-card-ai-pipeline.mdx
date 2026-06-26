@@ -1,0 +1,40 @@
+---
+title: "FFT Knowledge Refinery — 5-Stage AI Distillation Pipeline"
+publishedAt: "2024-07-12"
+summary: "Enterprise AI operations pipeline for data distillation and fact verification. 3-stage processing (Extract → Verify → Analyze) using Claude 3.5, Grok, and Gemini. RAG semantic search with pgvector, Telegram progress notifications, and Docker deployment."
+images: []
+team:
+  - name: "Cool Bao"
+    role: "Full-Stack Developer"
+    avatar: "/images/touxiang-cool.png"
+    linkedIn: "https://github.com/bkcsplayer"
+---
+
+## Overview
+
+The FFT Knowledge Refinery (Knowledge Card / FFT 狗腿子) is an enterprise AI pipeline that transforms raw information into verified, structured knowledge. It implements a 5-stage distillation process: input ingestion → AI extraction → semantic search enrichment → multi-model verification → structured output. The system was built to solve a specific pain point: how to extract actionable facts from large volumes of unstructured data (documents, screenshots, web pages) with confidence that the extracted information is accurate.
+
+## Key Features
+
+- **5-Stage Pipeline**: (1) Input ingestion (screenshots, PDFs, URLs, text), (2) Claude 3.5 extraction of structured facts, (3) pgvector RAG semantic search for context enrichment, (4) Multi-model verification (Grok + Gemini cross-validation), (5) Structured knowledge card output with confidence scores.
+- **Screenshot Analysis**: Upload screenshots of documents, tables, or charts. AI extracts text, identifies key data points, and structures the information — no manual transcription needed.
+- **RAG Semantic Search**: PostgreSQL + pgvector powers semantic search over previously extracted knowledge. Each new extraction is enriched with context from related existing knowledge cards.
+- **Multi-Model Verification**: Extracted facts are independently verified by Grok and Gemini. Only facts confirmed by both models with high confidence are included in the final output. Disputed facts are flagged for human review.
+- **Telegram Progress Notifications**: Real-time progress updates via Telegram Bot as documents move through the pipeline. Alerts when processing is complete or when a fact fails verification.
+- **Knowledge Card Export**: Final output as structured JSON + Markdown. Exportable to Notion, Google Sheets, or direct API integration with downstream systems.
+
+## Tech Stack
+
+- **Frontend**: React + Vite + TailwindCSS
+- **Backend**: FastAPI, SQLAlchemy Async, Alembic
+- **Database**: PostgreSQL 16 with pgvector extension
+- **AI**: Claude 3.5 (extraction), Grok + Gemini (verification), OpenRouter
+- **Infrastructure**: Docker Compose (3 services)
+
+## Deployment
+
+Docker Compose on VPS at `fftknowledgehelper.khtain.com`. Three-container setup: frontend (port 3030), backend (port 8000), PostgreSQL 16 (with pgvector).
+
+## Outcome
+
+The Knowledge Refinery pipeline processes hundreds of documents per batch run with accuracy verified by dual-model consensus. It serves as the backend intelligence layer for ArkDAO content production and other FFT projects requiring verified factual extraction.

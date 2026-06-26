@@ -1,0 +1,65 @@
+---
+title: "Docker Compose Patterns for Multi-Project Deployments"
+subtitle: "Reusable patterns from running 30+ containers across 10 projects"
+summary: "Practical Docker Compose patterns for running multiple independent projects on a single host — port allocation, network isolation, health checks, backup strategies, and zero-downtime deployments."
+publishedAt: "2025-01-20"
+tag: "DevOps"
+---
+
+## The Multi-Project Challenge
+
+Running one Docker Compose project is straightforward. Running ten on one machine requires discipline. Each project has its own compose file, its own containers, and its own data — but they share CPU, RAM, disk, and network. Here are the patterns that keep them from stepping on each other.
+
+## Port Allocation Convention
+
+Every project gets a port block. No exceptions. The EV Quote Helper gets 7620-7623. The Invoice Helper gets 3085, 8085, and its own PostgreSQL port. Solar Helper's internal port 5174 maps to its own external port.
+
+The convention: project-specific compose files map internal container ports to fixed external ports. Nginx references these ports in its reverse proxy configuration. No two projects share a port.
+
+## Network Topology
+
+Two approaches:
+
+1. **Bridge network per project** (isolated): Each compose file creates its own Docker network. Containers within the project can communicate; cross-project communication goes through the host. This is the default and works for most cases.
+2. **Shared external network** (connected): Create a shared Docker network and attach all projects to it. Useful when projects need direct container-to-container communication (e.g., a shared Redis instance).
+
+I use approach 1. Nginx on the host reaches containers via published ports. Databases are project-scoped — no shared database instances. Isolation > convenience.
+
+## Health Checks
+
+Every service that matters has a health check:
+
+- PostgreSQL: `pg_isready`
+- Redis: `redis-cli ping`
+- API: HTTP GET `/health` endpoint
+- Frontend: TCP port check
+
+Docker restarts unhealthy containers automatically. This single practice has saved more downtime than any other.
+
+## Backup Strategy
+
+Data lives in named volumes. Backup is a cron job that:
+
+1. Dumps each PostgreSQL database to `/backups/postgres/<project>/<date>.sql`
+2. Copies SQLite files (for lighter projects) to `/backups/sqlite/<project>/`
+3. Syncs everything to Synology NAS via rsync over Tailscale
+
+Restoration is a single command: `docker exec -i <container> psql < dump.sql`. Tested quarterly.
+
+## Zero-Downtime Updates
+
+For stateless services (frontends, API servers), a rolling update works:
+
+1. `docker compose build --no-cache <service>`
+2. `docker compose up -d --no-deps <service>`
+3. Old container stops, new container starts, Nginx retries for the second of downtime
+
+For stateful services (PostgreSQL), downtime is unavoidable but brief: `docker compose stop db && docker compose up -d db`.
+
+## The Monitoring Stack
+
+On the same VPS:
+
+- **Beszel**: System metrics (CPU, RAM, disk, network per container)
+- **Uptime Kuma**: HTTP health checks on every subdomain every 60 seconds
+- **Telegram Bot**: Alerts when any service fails three consecutive checks

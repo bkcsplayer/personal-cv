@@ -1,0 +1,68 @@
+---
+title: "Tailscale Mesh: Connecting NAS + VPS + Home Server + Dev PC"
+subtitle: "How I built a private, secure network spanning three physical machines and one VPS"
+summary: "A practical guide to Tailscale mesh networking for developers: connecting a Synology NAS, N305 home server, Windows dev PC, and cloud VPS into one private network with zero exposed ports."
+publishedAt: "2024-07-30"
+tag: "DevOps"
+---
+
+## The Problem
+
+Four machines, four locations, one network — without exposing anything to the internet:
+
+1. **Windows 11 PC** (dev workstation, RTX 3090): Where I write code
+2. **N305 Home Server** (Ubuntu, 30+ Docker containers): Where AI and trading bots run
+3. **Synology DS1621+ NAS** (DSM 7): Where data lives
+4. **VPS** (Ubuntu 22.04, 10+ public-facing apps): Where production runs
+
+The goal: access any machine from any other machine, securely, without opening firewall ports or configuring complex VPNs.
+
+## Enter Tailscale
+
+Tailscale builds a WireGuard-based mesh network. Every device gets a private IP in the `100.x.x.x` range. Connections are peer-to-peer where possible, relayed through Tailscale's DERP servers where NAT prevents direct connections.
+
+Installation on each machine is one command. Authentication uses your existing identity provider (Google, GitHub, etc.). Five minutes from zero to mesh.
+
+## My Configuration
+
+**VPS (6c-8g, `100.96.71.51`)**:
+- Public-facing Nginx sites are on the public IP
+- Internal services (Portainer, database admin panels) bind only to the Tailscale IP
+- SSH access restricted to Tailscale IP only (`/etc/ssh/sshd_config`: `ListenAddress 100.96.71.51`)
+
+**N305 (`100.76.169.49`)**:
+- All 30+ Docker containers accessible via Tailscale IP
+- Caddy reverse proxy handles internal routing between containers
+- No ports exposed to the public internet at all
+
+**Synology NAS (`100.89.32.20`)**:
+- FileStation API accessible to Docker containers via Tailscale
+- Backup sync target for all servers
+- Docker registry running for private container images
+
+**Windows PC (`100.119.238.86`)**:
+- VS Code Remote SSH to all three Linux machines
+- Direct database connections to N305's PostgreSQL instances
+- Browser access to all internal dashboards via Tailscale IPs
+
+## The Magic: Cross-Server Integration
+
+With the mesh in place, integration becomes trivial:
+
+1. Docker containers on the N305 can access files on the NAS via the Tailscale IP
+2. The VPS Nginx can proxy requests to services on the N305 when needed
+3. Backup scripts on the VPS rsync directly to the NAS
+4. Database dumps from any server land on the NAS within cron jobs
+
+## Security Model
+
+- **SSH**: Key-only, no password auth, Tailscale IPs only
+- **Internal services**: Bind to Tailscale IP (`100.x.x.x`), not `0.0.0.0`
+- **Firewall**: UFW on all Linux machines, default deny incoming, allow Tailscale range
+- **No exposed ports**: The only open ports on the entire network are 80/443 on the VPS
+
+## What I Love About This Setup
+
+- **Zero configuration for new devices.** Install Tailscale, authenticate, done.
+- **MagicDNS.** `n305-brain` resolves to `100.76.169.49` automatically across the mesh.
+- **It just works.** In two years, I've never had to debug a Tailscale connection issue.

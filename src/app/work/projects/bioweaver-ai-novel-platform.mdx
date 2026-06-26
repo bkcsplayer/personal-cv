@@ -1,0 +1,41 @@
+---
+title: "BioWeaver — AI Biographical Narrative Platform"
+publishedAt: "2024-10-18"
+summary: "AI-powered biographical narrative platform for elderly storytellers. Voice recording → Whisper transcription → Claude-assisted narrative polish → chapter generation. Purpose-built for preserving life stories with dignity."
+images: []
+team:
+  - name: "Cool Bao"
+    role: "Full-Stack Developer"
+    avatar: "/images/touxiang-cool.png"
+    linkedIn: "https://github.com/bkcsplayer"
+link: "https://novel.khtain.com"
+---
+
+## Overview
+
+BioWeaver (formerly Novel Helper) is an AI-powered platform designed to help elderly individuals preserve their life stories as structured biographical narratives. Unlike generic AI writing tools, BioWeaver is purpose-built for a non-technical audience: users speak their memories into a voice recorder, and the platform handles the rest — transcription, narrative structuring, chapter organization, and polished prose generation. The result is a professionally written biography that preserves family history with dignity and accuracy.
+
+## Key Features
+
+- **Voice-First Input**: Optimized for elderly users who may not be comfortable typing. Record stories in natural speech — the platform handles pauses, corrections, and tangential stories gracefully.
+- **Whisper Transcription**: OpenAI Whisper (via OpenRouter) transcribes voice recordings with high accuracy. Supports English and Mandarin Chinese with automatic language detection.
+- **Claude Narrative Polish**: Anthropic Claude transforms raw transcription into polished prose while preserving the storyteller's voice. The AI is prompted to maintain authenticity, not to embellish.
+- **Chapter Auto-Organization**: The platform detects natural story boundaries (time periods, life events, themes) and organizes content into logical chapters. Users can reorder, merge, or split chapters.
+- **Biography Export**: Export the completed biography as PDF (print-ready) or EPUB (e-reader). Customizable cover page with family photos.
+- **Privacy-First Architecture**: All voice recordings and transcripts are stored locally. No data is used for AI training. Designed for sensitive personal content.
+
+## Tech Stack
+
+- **Frontend**: React, TypeScript, Vite, TailwindCSS
+- **Backend**: FastAPI, SQLAlchemy Async, PostgreSQL
+- **AI**: Claude 3.5 (OpenRouter), OpenAI Whisper
+- **Export**: WeasyPrint (PDF), custom EPUB generator
+- **Infrastructure**: Docker Compose
+
+## Deployment
+
+Docker Compose on VPS, served at `novel.khtain.com`. PostgreSQL stores structured narratives; raw audio files stored on NAS via Tailscale for privacy.
+
+## Outcome
+
+BioWeaver has been used to produce several completed biographies. The voice-first approach proved essential — users who would never sit down to write a book found the experience of "telling stories" natural and enjoyable. The platform preserves family histories that would otherwise be lost.

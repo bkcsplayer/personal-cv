@@ -1,0 +1,42 @@
+---
+title: "Solar Company Full CRM Suite"
+publishedAt: "2025-03-15"
+summary: "Full-stack CRM purpose-built for solar installation companies. Project lifecycle management, client database, staff scheduling, payroll with email wage slips, vehicle tracking, financial reporting, and photo gallery — all in one Docker-deployed package."
+images: []
+team:
+  - name: "Cool Bao"
+    role: "Full-Stack Developer"
+    avatar: "/images/touxiang-cool.png"
+    linkedIn: "https://github.com/bkcsplayer"
+link: "https://solarhelper.khtain.com"
+---
+
+## Overview
+
+FFT Solar Helper v3 is a complete CRM solution designed specifically for solar installation companies. Unlike generic CRMs that require extensive customization, this system comes pre-configured for solar workflows: site assessments, panel layout planning, installation scheduling, permit tracking, and post-installation monitoring. The system handles the full lifecycle from lead to warranty support.
+
+## Key Features
+
+- **Project Lifecycle Management**: Track solar projects through pipeline stages: Lead → Site Assessment → Proposal → Contract → Permitting → Installation → Inspection → PTO → Warranty. Each stage has configurable checklists and required documents.
+- **Client Database**: Full CRM with contact history, installed system details, warranty tracking, and service call logging. Searchable and filterable by any field.
+- **Staff Management & Payroll**: Employee scheduling with calendar views. Automated payroll calculation with PDF wage slip generation and email delivery via Nodemailer.
+- **Vehicle Management**: Track company vehicles, maintenance schedules, insurance renewals, and fuel/charging logs. Assign vehicles to installation crews.
+- **Financial Dashboard**: Revenue tracking, cost analysis, profit-per-project metrics. Interactive charts for monthly/quarterly performance.
+- **Photo Gallery**: Per-project photo uploads with automatic thumbnail generation. Supports progress documentation and permit submissions.
+- **Data Backup & Restore**: One-click database backup and restore. Export all data to CSV for external analysis.
+
+## Tech Stack
+
+- **Frontend**: React 18, MUI (Material UI), React Router, Axios, Recharts, Mapbox GL JS
+- **Backend**: Node.js, Express, Sequelize ORM, JWT authentication, Multer file uploads
+- **Database**: PostgreSQL 16
+- **Email**: Nodemailer with SMTP
+- **Infrastructure**: Docker Compose (app + database), host-network mode for VPS deployment
+
+## Deployment
+
+Docker Compose with host-network mode on VPS. Served at `solarhelper.khtain.com` behind Nginx. Single-container deployment with persistent PostgreSQL volume.
+
+## Outcome
+
+The CRM manages dozens of active solar installation projects simultaneously. Staff scheduling and payroll automation alone save an estimated 10+ hours per month compared to the previous manual spreadsheet-based workflow.

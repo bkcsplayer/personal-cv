@@ -1,0 +1,40 @@
+---
+title: "PolyTrader — Bayesian Auto-Trading for Prediction Markets"
+publishedAt: "2024-12-10"
+summary: "Data-driven Polymarket auto-trading system with Maker strategy, Bayesian probability models, multi-AI analysis (Claude, DeepSeek, Grok, Gemini, Kimi, OpenAI), hardcoded risk controls, and 45% profit auto-pocketing."
+images: []
+team:
+  - name: "Cool Bao"
+    role: "Full-Stack Developer"
+    avatar: "/images/touxiang-cool.png"
+    linkedIn: "https://github.com/bkcsplayer"
+---
+
+## Overview
+
+PolyTrader is an automated trading system for Polymarket prediction markets. It combines a Maker (market-making) strategy with Bayesian probability models to generate trading signals, then cross-validates those signals against a panel of 7 AI models before executing trades. The system runs continuously with hardcoded risk controls that cannot be overridden — including a 45% profit auto-pocketing rule that diverts profits to a secure wallet before they can be lost to market reversals.
+
+## Key Features
+
+- **Maker Strategy Engine**: Continuous market-making on selected Polymarket contracts. Spread-based pricing with dynamic adjustment based on market depth and volatility.
+- **Bayesian Probability Models**: Statistical models that update probability estimates as new market data arrives. Prior probabilities are based on historical market outcomes and adjusted with each new piece of evidence.
+- **Multi-AI Signal Validation**: 7 AI models independently analyze each trade opportunity. A trade only executes if a majority of models agree on direction. Models include Claude 3.5, DeepSeek V4, Grok, Gemini 2.5, Kimi K2.5, OpenAI GPT-4, and MiniMax M2.5.
+- **Hardcoded Risk Controls**: Maximum position size, daily loss limits, and mandatory stop-losses are defined in source code — not in configuration files — preventing accidental or emotional overrides.
+- **45% Profit Pocketing**: Every profitable trade automatically routes 45% of profit to a separate secure wallet. This ensures capital preservation regardless of subsequent trading outcomes.
+- **Real-Time Dashboard**: React dashboard with live P&L, position tracking, model confidence scores, and trade history. Recharts-powered interactive charts.
+
+## Tech Stack
+
+- **Frontend**: React 18, TailwindCSS, Recharts
+- **Backend**: FastAPI, SQLAlchemy, Celery
+- **Database**: PostgreSQL 16, Redis 7 (Celery broker + cache)
+- **AI**: OpenRouter (multi-model), custom Bayesian models in Python
+- **Infrastructure**: Docker Compose, N305 home server
+
+## Deployment
+
+Docker Compose on N305 home server (192.168.1.166). The system runs 24/7 with Celery workers handling trade execution and data collection. Redis serves as both Celery message broker and real-time cache for market data.
+
+## Outcome
+
+The system demonstrated consistent profitability in backtesting across 200+ Polymarket contracts. The 7-model AI consensus mechanism significantly reduced false-positive signals compared to single-model approaches. The hardcoded risk controls proved their value during volatile market events.

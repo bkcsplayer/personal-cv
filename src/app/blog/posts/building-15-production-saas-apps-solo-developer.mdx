@@ -1,0 +1,34 @@
+---
+title: "Building 15+ Production SaaS Apps as a Solo Developer"
+subtitle: "Lessons from two years of shipping products alone"
+summary: "How I designed, built, deployed, and maintained 15+ production web applications as a solo developer — from EV charger quoting systems to solar CRMs to AI content factories."
+publishedAt: "2025-06-01"
+tag: "Engineering"
+---
+
+## The Solo Developer Reality
+
+Over the past two years, I've built and deployed more than 15 production web applications — alone. Not as side projects or tutorials, but as real SaaS tools used by real businesses: solar installation companies, EV charger installers, drone operators, and content teams. Here's what I learned along the way.
+
+## The Stack That Scales (Down)
+
+When you're one person, technology choices aren't just about performance — they're about cognitive load. Every new framework, every new database, every new deployment strategy you adopt is another thing you have to remember at 2 AM when something breaks.
+
+My core stack converged on:
+
+- **React + TypeScript + TailwindCSS** for every frontend. Not because it's trendy, but because I can build any UI in it without thinking.
+- **FastAPI** for most backends. Python's type hints combined with Pydantic validation means fewer runtime surprises.
+- **PostgreSQL** for nearly everything. TimescaleDB when I need time-series. pgvector when I need semantic search. One database, many extensions.
+- **Docker Compose** for all deployments. One `docker compose up -d` and the whole stack is running.
+
+## The VPS as a Production Platform
+
+All 15+ apps run on a single 8GB VPS (74.48.140.135). Nginx reverse proxy routes traffic to individual Docker containers. Baota Panel handles SSL certificates and domain management. Tailscale connects the VPS to my home N305 server and Synology NAS.
+
+The key insight: you don't need microservices and Kubernetes when you're serving dozens of users, not millions. A well-configured Nginx + Docker setup on a single VPS is surprisingly capable.
+
+## What I'd Do Differently
+
+1. **Start with better monitoring sooner.** When you have 10+ apps on one machine, you need to know which one is eating RAM. Beszel and Uptime Kuma saved me.
+2. **Don't build auth from scratch.** Every app that needed authentication used a different approach before I standardized. Just pick one and reuse it.
+3. **Document your infrastructure.** When you return to a project after 6 months, you won't remember which port it's on or which database it uses. Write it down.

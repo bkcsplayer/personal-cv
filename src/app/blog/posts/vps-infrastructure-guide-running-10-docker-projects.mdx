@@ -1,0 +1,39 @@
+---
+title: "VPS Infrastructure Guide: Running 10 Docker Projects on a Single Machine"
+subtitle: "Nginx reverse proxy, Docker Compose patterns, and the art of not over-provisioning"
+summary: "A practical guide to hosting 10+ Docker Compose projects on one 8GB VPS — Nginx reverse proxy configuration, container resource management, SSL automation, and Tailscale mesh networking."
+publishedAt: "2025-05-15"
+tag: "DevOps"
+---
+
+## Why One Machine?
+
+Before you reach for Kubernetes, ECS, or a $200/month cloud bill, consider: a single well-configured VPS can run a surprising number of applications. My 8GB Ubuntu VPS at 74.48.140.135 hosts 10 Docker Compose projects, each with 2-6 containers, behind a single Nginx reverse proxy. Total cost: roughly $30/month.
+
+## The Reverse Proxy Pattern
+
+Every project gets its own subdomain under khtain.com. Nginx handles SSL termination (via Baota Panel's automated Let's Encrypt integration) and routes traffic to Docker containers on internal ports.
+
+Each project follows the same port pattern: assign a port block, use consistent internal port mapping. For example, the EV Quote Helper occupies ports 7620-7623 (frontend, admin, backend, database). This convention means I can glance at a port number and know which project it belongs to.
+
+## Docker Compose Patterns
+
+After building 10+ projects with Docker Compose, patterns emerge:
+
+1. **Always use named volumes for databases.** Never bind-mount a database directory.
+2. **Use `restart: unless-stopped` everywhere.** Machines reboot. Services should come back.
+3. **Separate `docker-compose.yml` from `docker-compose.prod.yml`.** Development needs hot reload; production needs optimized builds.
+4. **Tag your images.** `latest` is a lie — tag with git commit hashes.
+5. **Health checks are not optional.** PostgreSQL, Redis, and API containers should all have health checks so Docker knows when to restart them.
+
+## SSL and Domain Management
+
+Baota Panel automates SSL certificate issuance and renewal via Let's Encrypt. Each new subdomain gets SSL in under a minute. The panel also provides a GUI for Nginx configuration, but I keep the raw config files version-controlled.
+
+## Tailscale for Secure Access
+
+Not everything needs to be public. Internal services (database admin panels, monitoring dashboards, development instances) are accessible only via Tailscale's private mesh network. The VPS, home N305 server, Synology NAS, and my Windows dev PC are all on the same tailnet. I can SSH into any machine from anywhere, securely.
+
+## Resource Monitoring
+
+With 10+ projects on one machine, resource contention is real. I use Beszel for system-level monitoring (CPU, RAM, disk, network) and Uptime Kuma to ping each subdomain every 60 seconds. If a service goes down, I get a Telegram notification within a minute.

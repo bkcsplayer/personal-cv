@@ -1,0 +1,53 @@
+---
+title: "Home Lab Evolution: N305 Server Running 30+ Docker Containers"
+subtitle: "How a $200 mini PC became my AI training ground, trading engine, and content factory"
+summary: "The architecture and evolution of my N305 home server — 30+ Docker containers running BTC trading bots, AI simulation platforms, knowledge management systems, and development tooling."
+publishedAt: "2024-10-25"
+tag: "DevOps"
+---
+
+## The Machine
+
+An Intel N305 mini PC with 16GB RAM and a 1TB NVMe drive. Cost: roughly $200. It sits next to my router running 30+ Docker containers 24/7. This is the story of what it runs and why.
+
+## The Initial Setup
+
+When I first got the N305, I had three goals:
+
+1. Run AI and trading systems that need to be online 24/7 (not on my dev PC that I reboot frequently)
+2. Offload compute-intensive workloads from the VPS (which only has 8GB RAM shared across 10+ production apps)
+3. Create a private development network with my Synology NAS for data storage
+
+## What Runs Where: The Complete Map
+
+### On the N305 (Ubuntu Server):
+- **BTC Auto-Trade Stack** (19 containers): Freqtrade trading engine, TimescaleDB for market data, Jupyter for strategy research, Redis for caching, API server + frontend dashboard, plus data collectors and strategy workers
+- **PolyTrader** (3 containers): FastAPI backend, PostgreSQL, Redis — prediction market auto-trading
+- **SalesSim** (4 containers): AI sales simulation platform with virtual customer engine
+- **Brain Knowledge System** (12 containers): Caddy reverse proxy, Syncthing file sync, Uptime Kuma monitoring, Telegram bot, capture API, wiki compiler, research agent, GitHub indexer, content factory, web UI
+- **Infrastructure**: Portainer for Docker management, Beszel agent for monitoring
+
+### On the VPS (74.48.140.135):
+- 10 production Docker Compose projects (SaaS tools for clients)
+- Nginx reverse proxy serving 15+ domains
+- PM2: Khtain Digital website + FFT AirDrone upload service
+
+### On the NAS (Synology DS1621+):
+- All project backups
+- Media storage (drones, photos)
+- FileStation API integration point for apps
+
+## The Tailscale Mesh
+
+All four devices — VPS, N305, NAS, Windows 11 PC — are connected via Tailscale. This means:
+
+- I can SSH from my dev PC into any server from anywhere, securely
+- Docker containers on the N305 can access files on the NAS
+- Internal services (Portainer, database admin panels) are never exposed to the public internet
+- The VPS can route requests to the N305 for AI processing
+
+## What I'd Do Differently
+
+1. **Get 32GB RAM.** 16GB is tight with 30+ containers. ZRAM helps but isn't a substitute.
+2. **Use Proxmox from day one.** Bare-metal Ubuntu works, but VMs would provide better isolation.
+3. **Document the container map at the start.** I now maintain a markdown file listing every container, its port, its purpose, and its dependencies. Building this retroactively was painful.

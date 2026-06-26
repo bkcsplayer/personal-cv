@@ -1,0 +1,56 @@
+---
+title: "Smart Contract Development with Hardhat: Lessons from 5 Deployed Contracts"
+subtitle: "From ERC-20 to staking pools — what worked, what broke, and what I'd do differently"
+summary: "Practical lessons from deploying 5 verified smart contracts on Sepolia: ERC-20 token, ERC-721 NFT, staking pool, lottery with Chainlink VRF, and burn-to-access game mechanic."
+publishedAt: "2024-12-05"
+tag: "Web3"
+---
+
+## The Five Contracts
+
+Over the course of building FrontierX Web3, I deployed five smart contracts on Ethereum Sepolia testnet. Each one taught me something new about Solidity, Hardhat, and the gap between "it compiles" and "it works."
+
+### 1. FRX ERC-20 Token
+
+The foundation. OpenZeppelin's ERC-20 implementation works out of the box, but the decisions around minting and burning matter:
+
+- **Mint control**: Only the platform contract (not the deployer) should be able to mint. Use OpenZeppelin's `AccessControl` with a `MINTER_ROLE`.
+- **Burn mechanics**: Tokens that can be burned create utility. A token that only goes up in supply is a token that only goes down in value (eventually).
+
+### 2. Genesis Pass ERC-721 NFT
+
+Standard ERC-721 with tiered metadata. The key lesson: **on-chain vs. off-chain metadata**. On-chain metadata is immutable but expensive to store. Off-chain (IPFS) is cheaper but requires a pinned gateway. I used IPFS with a dedicated gateway for metadata JSON.
+
+### 3. Staking Pool
+
+The most complex contract. Staking requires:
+
+- Tracking per-user staked amounts and staking timestamps
+- Calculating rewards based on time-weighted balances
+- Handling unstaking with proper reward distribution
+- Preventing reentrancy on reward claims
+
+OpenZeppelin's `ReentrancyGuard` is essential here. Every external function that transfers tokens should be guarded.
+
+### 4. Lottery with Chainlink VRF
+
+Verifiable randomness is the hardest problem in smart contracts. Chainlink VRF solves it, but the integration has sharp edges:
+
+- **VRF subscription must be funded with LINK.** Easy to forget.
+- **Randomness fulfillment is asynchronous.** Your contract requests randomness now, gets the result ~30 seconds later. Design your flow around this delay.
+- **Gas costs for VRF callbacks can surprise you.** Test on Sepolia, check gas usage.
+
+### 5. Crystal Forge (Burn-to-Access)
+
+The simplest but most fun contract. Users burn FRX + NFT to "forge" a new, upgraded NFT. The randomness determines rarity. Key insight: **token sinks need to feel rewarding, not punitive.** Users should feel like they're gaining something, not losing.
+
+## Hardhat Tips
+
+1. **`hardhat-verify` is your best friend.** One command verifies all contracts on Etherscan.
+2. **Write deployment scripts that are idempotent.** You will re-run them. They should handle already-deployed contracts gracefully.
+3. **Use `hardhat console` for ad-hoc contract interaction.** Faster than building a UI for testing.
+4. **Gas reporting (`hardhat-gas-reporter`) should be in your CI pipeline.** Gas surprises are expensive.
+
+## The Uncomfortable Truth
+
+Smart contract development is 20% Solidity and 80% everything else: tokenomics design, frontend integration, user experience, security auditing, and testnet debugging. If you're learning Web3, expect to spend most of your time outside `contracts/`.

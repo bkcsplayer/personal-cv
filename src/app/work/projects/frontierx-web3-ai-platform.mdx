@@ -1,0 +1,42 @@
+---
+title: "FrontierX Web3 — AI-Powered Web3 Platform"
+publishedAt: "2025-05-20"
+summary: "Portfolio-grade Web3 + AI demo platform featuring ERC-20 utility token (FRX), ERC-721 NFT access passes, staking rewards, decentralized lottery, Crystal Forge game, and burn-gated AI agent hub."
+images:
+  - "/images/og/home.jpg"
+team:
+  - name: "Cool Bao"
+    role: "Full-Stack Developer"
+    avatar: "/images/touxiang-cool.png"
+    linkedIn: "https://github.com/bkcsplayer"
+link: "https://frontierweb3.khtain.com"
+---
+
+## Overview
+
+FrontierX Web3 is a comprehensive demonstration platform that bridges Web3 tokenomics with AI-powered utility. Built as a portfolio-grade showcase, it combines five smart contracts (ERC-20, ERC-721, staking, lottery, and burn-to-access) with an interactive Next.js frontend. The platform demonstrates real-world blockchain integration: users connect via MetaMask/RainbowKit, interact with Sepolia testnet contracts, and experience a complete token economy cycle from minting to burning.
+
+## Key Features
+
+- **FRX ERC-20 Utility Token**: Custom token deployed on Sepolia with 1M total supply, 18 decimals, and integrated staking rewards system. Users can claim, transfer, and stake FRX directly from the dApp.
+- **Genesis Pass ERC-721 NFTs**: Access pass NFTs with tiered metadata. Minting requires FRX token approval, creating organic token utility.
+- **Staking Pool**: Stake FRX tokens to earn yield. Configurable APY and lock periods. Real-time reward calculation displayed in the UI.
+- **Decentralized Lottery**: Chainlink VRF-powered verifiable randomness for fair draws. Entry requires NFT + FRX burn. Multi-round system with increasing prize pools.
+- **Crystal Forge Game**: Gamified token burning mechanism. Users combine FRX + NFTs to "forge" upgraded items with provably rare outcomes.
+- **AI Agent Hub**: Burn-gated access to AI agents. Holding specific NFTs unlocks tiers of AI-powered tools, creating a real utility sink for the token economy.
+
+## Tech Stack
+
+- **Frontend**: Next.js, wagmi v2, RainbowKit, Viem, TailwindCSS
+- **Smart Contracts**: Solidity 0.8.20, Hardhat, OpenZeppelin Contracts v5
+- **Network**: Ethereum Sepolia testnet (chain ID 11155111)
+- **Oracle**: Chainlink VRF for verifiable randomness
+- **Deployment**: Vercel (frontend) + 5 verified contracts on Sepolia Etherscan
+
+## Deployment
+
+5 smart contracts verified on Sepolia Etherscan. Frontend deployed on Vercel with custom domain `frontierweb3.khtain.com`. WalletConnect v2 integration for mobile wallet support.
+
+## Outcome
+
+All 5 smart contracts are verified and publicly auditable on Sepolia. The platform serves as both a technical portfolio piece demonstrating full-stack Web3 proficiency and a testbed for tokenomic models that could be adapted for production use.

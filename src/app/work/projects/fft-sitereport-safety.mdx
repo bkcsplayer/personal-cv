@@ -1,0 +1,43 @@
+---
+title: "Digital Safety Workflow for Solar Installation Teams"
+publishedAt: "2024-09-22"
+summary: "Digital replacement for paper Fall Protection Plans and Hazard Assessments. 6-step safety wizard, e-signature capture, employee/certification management, Groq Whisper AI voice transcription, Synology NAS document storage, and Telegram Bot integration."
+images: []
+team:
+  - name: "Cool Bao"
+    role: "Full-Stack Developer"
+    avatar: "/images/touxiang-cool.png"
+    linkedIn: "https://github.com/bkcsplayer"
+link: "https://sitereport.khtain.com"
+---
+
+## Overview
+
+FFT SiteReport digitizes the mandatory safety documentation workflow for solar installation teams. Before this tool, crews completed paper Fall Protection Plans (FPP) and Hazard Assessments (HA) — forms that were frequently lost, illegible, or incomplete. SiteReport replaces the entire paper process with a 6-step digital wizard accessible on any mobile device. Crew leads complete safety assessments on-site, capture e-signatures, and the system auto-archives everything to NAS storage with Telegram notifications to safety officers.
+
+## Key Features
+
+- **6-Step Safety Wizard**: Guided workflow that guarantees completeness. Steps: Site Info → Crew Roster → Hazard Identification → Control Measures → Sign-Off → Archive. Each step must be completed before proceeding.
+- **E-Signature Capture**: Touch-screen signature capture on mobile devices. Legally valid digital signatures appended to PDF documents. Both crew lead and safety officer sign-off.
+- **Employee & Certification Management**: Track crew members, their safety certifications (First Aid, Fall Protection, WHMIS), and expiry dates. Automatic alerts when certifications are due for renewal.
+- **Groq Whisper AI Voice Transcription**: Voice-to-text for hazard notes and observations. Powered by Groq's ultra-fast Whisper implementation. Allows crew leads to dictate observations hands-free while wearing PPE.
+- **Synology NAS Integration**: All completed safety documents are automatically archived to Synology NAS via FileStation API. Organized by date, site, and crew. Full-text searchable.
+- **Telegram Bot Notifications**: Real-time alerts to safety officers when forms are submitted, when hazards are flagged as high-risk, and when certifications expire.
+
+## Tech Stack
+
+- **Frontend**: React 18, TypeScript, Vite 6, TailwindCSS, Framer Motion
+- **Backend**: FastAPI, SQLAlchemy 2.0 Async, Pydantic v2
+- **Database**: PostgreSQL 16
+- **AI**: Groq Whisper (voice transcription), DeepSeek AI (hazard analysis)
+- **Storage**: Synology NAS via FileStation API
+- **Notifications**: Telegram Bot API
+- **Infrastructure**: Docker Compose (3 services)
+
+## Deployment
+
+Docker Compose on VPS at `sitereport.khtain.com`. Three-container setup: frontend, backend API, PostgreSQL. NAS storage mounted via Tailscale for secure document archiving.
+
+## Outcome
+
+SiteReport eliminated paper safety forms across the solar installation fleet. Safety compliance rates improved from ~70% (paper forms often incomplete) to 100% (digital wizard enforces completeness). Voice transcription saves crews 15+ minutes per site.

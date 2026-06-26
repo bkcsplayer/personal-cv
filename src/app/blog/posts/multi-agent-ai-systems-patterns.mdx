@@ -1,0 +1,49 @@
+---
+title: "Multi-Agent AI Systems: From Novel Writing to Prediction Markets"
+subtitle: "Patterns for reliable multi-agent AI architectures that actually work"
+summary: "How I built multi-agent AI systems for three different domains — novel writing, prediction market trading, and knowledge distillation — and the architectural patterns that emerged across all three."
+publishedAt: "2024-08-22"
+tag: "AI"
+---
+
+## The Multi-Agent Promise
+
+Single-model AI is unreliable. It hallucinates, it drifts, it forgets context. Multi-agent systems promise better results by having multiple AI instances check, critique, and improve each other's work. But the gap between "sounds good in a paper" and "works in production" is wide. Here's what I learned building three of them.
+
+## System 1: Inkos — 10-Agent Novel Writing Pipeline
+
+**Domain**: Creative writing (long-form web novels)
+**Agents**: Radar, Planner, Composer, Architect, Writer, Observer, Reflector, Normalizer, Auditor, Reviser
+**Pattern**: Sequential pipeline with feedback loops
+
+Each agent has a specialized role. The Radar scans the existing novel for continuity issues. The Planner outlines the next chapter. The Writer drafts it. The Auditor checks 33 dimensions (grammar, continuity, pacing, AI-detection risk). The Reviser fixes flagged issues.
+
+**Key insight**: The Auditor is the most important agent. Generation is easy; verification is hard. Investing in the critique agents produces better output than making the writer agent more powerful.
+
+## System 2: PolyTrader — 7-Model Consensus Trading
+
+**Domain**: Financial prediction markets
+**Agents**: Claude, DeepSeek, Grok, Gemini, Kimi, OpenAI, MiniMax (all analyzing the same trade)
+**Pattern**: Parallel analysis → majority consensus → execution
+
+Unlike the novel writer (sequential), the trading system is parallel. All 7 models independently analyze the same market opportunity. A trade only executes if a majority agree on direction.
+
+**Key insight**: Model diversity is the strength. Different models have different blind spots. Claude is good at reasoning, DeepSeek at math, Gemini at broad context. Their collective accuracy exceeds any individual model.
+
+## System 3: Knowledge Refinery — 3-Stage Extraction Pipeline
+
+**Domain**: Document analysis and fact extraction
+**Agents**: Claude 3.5 (extraction), Grok + Gemini (verification)
+**Pattern**: Extract → Enrich → Verify → Output
+
+Documents go through structured fact extraction, semantic search enrichment, and dual-model verification before being accepted as "verified knowledge."
+
+**Key insight**: The verification step catches 20-30% of extracted "facts" that are actually hallucinations. Without cross-model verification, the output is unreliable. With it, the system achieves high factual accuracy.
+
+## Common Patterns Across All Three
+
+1. **No single model is trusted unconditionally.** Every output is verified by at least one other model.
+2. **Specialization beats generality.** An agent with a narrow, well-defined task outperforms a general "do everything" agent.
+3. **The critique/verification layer is more important than the generation layer.**
+4. **Always have a non-AI gate.** Trading has hardcoded risk controls. Knowledge extraction has a "human review" flag for low-confidence facts. Novel writing has hard grammar rules.
+5. **Pipeline failures should be graceful.** If one agent call fails, the pipeline continues with reduced confidence, not a crash.

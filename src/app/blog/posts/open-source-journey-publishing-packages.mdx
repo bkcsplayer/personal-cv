@@ -1,0 +1,44 @@
+---
+title: "Open Source Journey: Publishing npm Packages & Claude Code Plugins"
+subtitle: "From consumer to contributor — lessons from publishing packages the world actually uses"
+summary: "How I went from using open source to publishing: a TypeScript text layout library, Claude Code configuration collections, and a web novel writing plugin — plus what I learned about documentation, API design, and maintenance."
+publishedAt: "2024-09-18"
+tag: "Engineering"
+---
+
+## The Shift
+
+For years, I consumed open source. `npm install`, `pip install`, `docker pull` — I took what others built. Two years ago, that changed. I published my first npm package. Then another. Then a Claude Code plugin. Here's what I learned about being on the other side.
+
+## Project 1: Pretext — Text Measurement Without DOM
+
+The problem: measuring rendered text dimensions in JavaScript typically requires the DOM (create an element, measure it, remove it). This is slow and doesn't work in non-DOM environments (Web Workers, Node.js, Canvas rendering).
+
+Pretext solves this by pre-computing font metrics using Canvas API and caching them. Text measurement becomes a pure function: no DOM access, no reflows, under 1ms per call.
+
+**Tech**: TypeScript 6.0, Bun, oxlint
+**Published on**: npm as `@chenglou/pretext`
+
+**Lesson**: The README is more important than the code. A well-documented single-function library gets more adoption than a poorly-documented framework.
+
+## Project 2: ECC Universal — Claude Code Configuration Collection
+
+After 10+ months of daily Claude Code usage, I had accumulated dozens of agents, skills, hooks, and rules. ECC Universal packages that experience into a reusable configuration collection that other developers can adopt.
+
+**Lesson**: Configuration is a form of API design. Your hooks and skills need clear names, documented behavior, and backward compatibility considerations.
+
+## Project 3: WebNovel Writer — Claude Code Plugin
+
+A Claude Code plugin for long-form web novel writing with AI. It manages character settings, plot hooks, world-building rules, and chapter continuity. Features a Story System with master settings, RAG retrieval for context, and a dashboard for visualization.
+
+**Tech**: Python 3.10+, Claude Code plugin framework, RAG (Qwen Embedding + Jina Reranker)
+**Published on**: Claude Code Plugin Marketplace
+
+**Lesson**: AI-assisted creativity tools need guardrails, not just generation. The plugin's most-used feature is the continuity checker — preventing contradictions — not the writing assistant.
+
+## What Publishing Taught Me
+
+1. **Documentation is the product.** If there's no README with a working example in the first 30 seconds, nobody uses your package.
+2. **Semantic versioning matters.** Breaking changes without a major version bump will get you issues — deservedly.
+3. **Open source maintenance is work.** Every package you publish is a commitment. Users will file issues, request features, and expect responses.
+4. **It's worth it.** Having your work used by strangers is deeply satisfying. It also makes you a better engineer — writing code for others forces clarity.

@@ -1,0 +1,49 @@
+---
+title: "Building a Solar CRM: Real-World SaaS Architecture"
+subtitle: "The decisions, tradeoffs, and lessons from building CRM software for solar installation companies"
+summary: "Architecture decisions behind a full-stack solar CRM: why MUI over Tailwind for data-dense interfaces, Sequelize ORM patterns, JWT auth in practice, and managing photo uploads with Multer."
+publishedAt: "2024-11-15"
+tag: "Engineering"
+---
+
+## Not Your Average CRM
+
+Solar installation is a complex business. A CRM for solar companies isn't just contacts and deals — it's site assessments, panel layouts, permit tracking, installation scheduling, inspection coordination, PTO (Permission to Operate), and warranty management. Each project has 50+ data points across 9 lifecycle stages. The software has to handle all of it without making users wish for a spreadsheet.
+
+## MUI Over Tailwind — When Data Density Matters
+
+Most of my projects use TailwindCSS. For the Solar CRM, I chose Material UI (MUI). The reason: data-dense tables with 20+ columns, multi-select filters, nested dropdowns, and complex forms with conditional logic. MUI's DataGrid alone justified the choice — server-side sorting, filtering, pagination, and column management out of the box.
+
+The tradeoff: MUI is heavier than Tailwind, both in bundle size and cognitive load. Customizing MUI components requires understanding the `sx` prop and theme overrides. For a data-dense B2B app, it was worth it. For a marketing site, I'd still reach for Tailwind.
+
+## Sequelize ORM: The Good and the Bad
+
+Sequelize (Node.js ORM for PostgreSQL) gets a lot of criticism, but for this project, it worked well:
+
+**Good**: Migrations, model definitions, associations (hasMany, belongsTo), and eager loading (`include`) made complex queries readable. The model file is the single source of truth for the database schema.
+
+**Bad**: Complex queries (aggregations, window functions, recursive CTEs) require raw SQL. The Sequelize query syntax for anything beyond basic CRUD is verbose. N+1 queries are easy to create accidentally — always check `include` for unnecessary eager loads.
+
+## JWT Auth Without Over-Engineering
+
+Every app needs auth. For the Solar CRM, I kept it simple:
+
+1. User logs in with email/password → server returns JWT (access token + refresh token)
+2. Access token (short-lived, 15 minutes) is stored in memory, not localStorage (XSS-resistant)
+3. Refresh token (long-lived, 7 days) is stored in an httpOnly cookie (CSRF-protected)
+4. Axios interceptor automatically refreshes the access token when a 401 is returned
+
+No OAuth, no third-party auth providers. For a B2B internal tool with a handful of users, this is sufficient. Don't over-engineer auth for 10 users.
+
+## Photo Management with Multer
+
+Solar projects generate a lot of photos: site assessments, panel installations, electrical work, inspections. The CRM needed to handle photo uploads gracefully:
+
+- **Multer** for multipart form data parsing
+- **Sharp** for automatic thumbnail generation (800px width, quality 80)
+- **Disk storage** (not S3/cloud) since the app runs on a single VPS
+- **Lazy loading** of photo galleries to avoid loading 50+ images on a single page
+
+## The Real Lesson
+
+The hardest part of this CRM wasn't the code — it was the domain understanding. I spent weeks learning solar installation workflows before writing a single line of code. Software that doesn't understand the business process it's automating is just a pretty spreadsheet.

@@ -1,0 +1,40 @@
+---
+title: "Sub2API — AI API Gateway & Subscription Platform"
+publishedAt: "2024-08-30"
+summary: "Full-stack AI API gateway for distributing subscription-based API access. Per-user API key management, token-level billing with multi-currency support, smart model scheduling, concurrency rate limiting, and multi-upstream account rotation."
+images: []
+team:
+  - name: "Cool Bao"
+    role: "Full-Stack Developer"
+    avatar: "/images/touxiang-cool.png"
+    linkedIn: "https://github.com/bkcsplayer"
+link: "https://demo.sub2api.org"
+---
+
+## Overview
+
+Sub2API is an API gateway platform that enables businesses to offer subscription-based access to AI model APIs. The platform solves a common problem: how to resell AI API access to users while managing costs, rate limits, and fair usage. It provisions per-user API keys, tracks token consumption at the user level, and intelligently schedules requests across multiple upstream AI provider accounts to maximize throughput within rate limits.
+
+## Key Features
+
+- **Per-User API Key Management**: Generate, revoke, and rate-limit API keys per subscriber. Each key has configurable quotas (tokens/month, requests/minute, concurrent connections).
+- **Token-Level Billing**: Track consumption per token across different models. Multi-currency billing with configurable exchange rates. Supports prepaid and postpaid models.
+- **Smart Model Scheduling**: Distribute incoming requests across multiple upstream API accounts to stay within rate limits. Priority-based scheduling with configurable model routing rules.
+- **Concurrency Control**: Queue-based request handling with configurable per-user and global concurrency limits. Prevents noisy-neighbor problems.
+- **Multi-Provider Support**: Unified API that proxies to Claude, Gemini, Codex, and other AI providers. Users get one API key that works across all models.
+- **Admin Dashboard**: Real-time usage analytics, revenue tracking, user management, and system health monitoring. Built with Vue 3 and TailwindCSS.
+
+## Tech Stack
+
+- **Backend**: Go 1.25, Gin web framework, Ent ORM
+- **Frontend**: Vue 3, Vite 5, TailwindCSS
+- **Database**: PostgreSQL 15, Redis 7
+- **Infrastructure**: Docker Compose (3 services), install script
+
+## Deployment
+
+Docker Compose on VPS with automated `install.sh` script. The platform is designed for self-hosting by businesses that want to control their own API gateway infrastructure.
+
+## Outcome
+
+Sub2API (forked and enhanced from the open-source Wei-Shaw/sub2api project) demonstrates full-stack polyglot development capability — Go backend with Vue 3 frontend, a different stack from the usual React/FastAPI combination. The token-level billing system handles thousands of API calls per day.

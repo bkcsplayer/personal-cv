@@ -1,0 +1,41 @@
+---
+title: "EV Charger Quoting System for Enterprises"
+publishedAt: "2025-04-10"
+summary: "Enterprise-grade EV charger installation quoting and project management system. Mobile-first customer flow, 10-tab admin dashboard, e-transfer payment processing, Twilio/SMTP notifications, and full financial P&L reporting."
+images: []
+team:
+  - name: "Cool Bao"
+    role: "Full-Stack Developer"
+    avatar: "/images/touxiang-cool.png"
+    linkedIn: "https://github.com/bkcsplayer"
+link: "https://evquote.khtain.com"
+---
+
+## Overview
+
+The FFT EVQuote Helper is a complete enterprise quoting and project management system designed for EV charger installation companies. It replaces spreadsheets and manual workflows with a dual-interface platform: a mobile-first customer portal for quote acceptance and payment, and a comprehensive admin dashboard with 10 specialized tabs for project lifecycle management. The system handles everything from initial site assessment data entry to final invoicing with e-transfer payment reconciliation.
+
+## Key Features
+
+- **Mobile Customer Portal**: Responsive web app where customers view quotes, accept proposals, and complete e-transfer payments. Step-by-step wizard guides non-technical users through the process.
+- **Admin Dashboard (10 Tabs)**: Comprehensive project management with tabs for Case Detail, BOM (Bill of Materials), Materials Procurement, Financial P&L, Timeline, Documents, Photos, Communications, Payments, and Settings.
+- **BOM & Materials Management**: Auto-generated bill of materials based on installation parameters. Tracks procurement status, supplier costs, and inventory levels.
+- **Financial P&L Engine**: Real-time profit-and-loss calculation per project. Factors in material costs, labor, permits, and overhead. Exportable to CSV for accounting.
+- **Payment Processing**: Integrated e-transfer workflow with status tracking (Pending → Deposited → Reconciled). Automated payment reminders via Twilio SMS and SMTP email.
+- **Twilio + SMTP Notifications**: SMS alerts for quote status changes, payment confirmations, and installation scheduling. HTML email templates for formal client communications.
+
+## Tech Stack
+
+- **Frontend**: React + Vite, TailwindCSS, React Router
+- **Backend**: FastAPI, SQLAlchemy 2.0, Pydantic v2
+- **Database**: PostgreSQL 16
+- **Notifications**: Twilio SMS API, SMTP (aiosmtplib)
+- **Infrastructure**: Docker Compose (4 services: frontend, admin, backend, database), Nginx reverse proxy
+
+## Deployment
+
+Docker Compose on VPS (74.48.140.135) with Nginx reverse proxy. Served at `evquote.khtain.com`. All services run in isolated containers with Docker networking.
+
+## Outcome
+
+The system transformed a previously manual quoting process into a streamlined digital workflow. Project managers can now track 20+ concurrent installations from quote to completion. The financial P&L engine provides real-time profitability metrics that were previously only available at month-end close.

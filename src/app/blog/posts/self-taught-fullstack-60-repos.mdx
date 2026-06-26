@@ -1,0 +1,55 @@
+---
+title: "Self-Taught Full-Stack: 60+ Repos and What I Learned"
+subtitle: "The journey from first commit to production SaaS apps"
+summary: "How building 60+ GitHub repositories across React, FastAPI, Solidity, Docker, and AI taught me more than any CS degree — and the key lessons from each technology domain."
+publishedAt: "2025-02-28"
+tag: "Engineering"
+---
+
+## The Education of Building
+
+I don't have a CS degree. My education has been 60+ repositories, each one a lesson in something — sometimes what to do, often what not to do. Here's what each technology domain taught me, ordered roughly by when I learned it.
+
+## React & Frontend
+
+My first React app was a mess of class components, prop drilling, and inline styles. By repo #30, patterns had crystallized:
+
+- **Server components over client components** whenever possible. Less JavaScript shipped means faster pages.
+- **TailwindCSS eliminated my CSS anxiety.** No more naming things, no more dead stylesheets, no more specificity wars.
+- **TypeScript is not optional.** The hour you spend typing a function is repaid tenfold when you refactor six months later.
+
+## Backend Architecture
+
+I started with Node.js/Express (FFT Solar Helper), explored Go/Gin (Sub2API), and eventually settled on FastAPI as my daily driver. Each backend taught something different:
+
+- **Node.js/Express**: Rapid prototyping, enormous ecosystem, callback hell if you're not careful with async/await.
+- **Go/Gin**: Blazing fast, tiny containers, but more verbose for CRUD operations.
+- **FastAPI**: Type hints as validation is a superpower. Pydantic + SQLAlchemy is a clean, productive stack. The async support handles concurrent requests without the complexity of Node.js event loops.
+
+## Database Design
+
+PostgreSQL has been the constant. Whether it's a CRM, a trading system, or a content factory, the same patterns apply:
+
+- **Migrations are non-negotiable.** Alembic auto-generates them, but always review the generated SQL.
+- **Indexes aren't free.** Every index speeds up reads but slows down writes. Profile before indexing.
+- **TimescaleDB is the secret weapon for time-series data.** Hypertables automatically partition by time, and compression reduces storage by 90%+.
+
+## Web3
+
+Solidity was humbling. It looks like JavaScript but acts like a bank vault — every line of code has financial consequences:
+
+- **OpenZeppelin contracts are battle-tested. Use them.**
+- **Test on testnet extensively.** Sepolia gas is free; mainnet mistakes are not.
+- **Verify your contracts.** Unverified contracts look amateurish.
+
+## AI Integration
+
+Working with LLM APIs taught me humility about AI capabilities:
+
+- **Prompt engineering is real but fragile.** A prompt that works today might fail tomorrow after a model update. Test prompts in CI.
+- **Multi-model verification is essential for factual output.** No single model is reliable enough to trust without cross-checking.
+- **RAG works, but chunking strategy matters more than the embedding model.**
+
+## The Meta-Lesson
+
+The single biggest lesson: **ship early, iterate publicly.** The repos that taught me the most are the ones that went to production — real users, real problems, real consequences. Tutorial repos taught syntax; production repos taught engineering.

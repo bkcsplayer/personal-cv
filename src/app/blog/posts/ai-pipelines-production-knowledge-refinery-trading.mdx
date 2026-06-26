@@ -1,0 +1,42 @@
+---
+title: "AI Pipelines in Production: Knowledge Refinery & Trading Systems"
+subtitle: "Multi-stage AI processing, RAG search, and multi-model verification in real-world systems"
+summary: "How I built production AI pipelines that process documents, verify facts with dual-model consensus, analyze prediction markets with 7 AI models, and distill knowledge with pgvector semantic search."
+publishedAt: "2025-03-10"
+tag: "AI"
+---
+
+## Beyond Chat
+
+AI in production isn't chatbots. It's pipelines — sequences of specialized AI calls where the output of one model feeds the input of another, with validation gates in between. I've built several such pipelines, and the patterns that work are surprisingly consistent.
+
+## The Knowledge Refinery Pipeline
+
+The FFT Knowledge Refinery processes unstructured documents through five stages:
+
+1. **Ingest** — Screenshots, PDFs, URLs, or raw text enter the system.
+2. **Extract** — Claude 3.5 reads the document and extracts structured facts (names, dates, figures, claims).
+3. **Enrich** — pgvector semantic search finds related knowledge from previously processed documents, providing context.
+4. **Verify** — Grok and Gemini independently verify each extracted fact. Only facts with dual-model consensus pass.
+5. **Output** — Verified facts are formatted as structured knowledge cards with confidence scores.
+
+The key insight: **no single model is trustworthy enough for factual extraction.** Cross-model verification catches hallucinations that any individual model would miss.
+
+## The PolyTrader Signal Pipeline
+
+PolyTrader uses a different pattern — model diversity for decision-making:
+
+1. **Data Collection** — Market data from Polymarket APIs, order books, and historical outcomes.
+2. **Bayesian Modeling** — Statistical models produce baseline probability estimates.
+3. **Multi-AI Analysis** — Seven AI models (Claude, DeepSeek, Grok, Gemini, Kimi, OpenAI, MiniMax) independently analyze each trade opportunity.
+4. **Consensus Gate** — A trade only executes if a majority of models agree on direction.
+5. **Execution** — Hardcoded risk controls enforce position limits, stop-losses, and profit pocketing.
+
+## Common Patterns
+
+Across both systems, the same patterns emerge:
+
+1. **One model is an opinion. Multiple models with consensus is a signal.**
+2. **Always have a non-AI fallback or gate.** Bayesian models and hardcoded rules don't hallucinate.
+3. **Track confidence scores.** You need to know when the system is uncertain so you can escalate to human review.
+4. **Pipeline failures should be graceful.** If one AI call times out, the pipeline should continue with reduced confidence, not crash.

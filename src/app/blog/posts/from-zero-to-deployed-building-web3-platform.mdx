@@ -1,0 +1,34 @@
+---
+title: "From Zero to Deployed: Building a Web3 Platform on Sepolia"
+subtitle: "A walkthrough of FrontierX Web3 — smart contracts, tokenomics, and frontend integration"
+summary: "How I built a full-stack Web3 platform with ERC-20 tokens, ERC-721 NFTs, staking, lottery, and an AI agent hub — all deployed on Ethereum Sepolia testnet."
+publishedAt: "2025-04-20"
+tag: "Web3"
+---
+
+## The Vision
+
+FrontierX Web3 started as a question: what does a complete Web3 platform look like when you combine tokenomics with AI utility? Not just a token, not just an NFT collection — but a functioning ecosystem where tokens have real on-platform utility, and AI agents provide the "why" behind the "what."
+
+## Smart Contract Architecture
+
+Five contracts, each serving a distinct role, deployed and verified on Sepolia:
+
+1. **FRX ERC-20 Token** — 1M total supply, 18 decimals. Standard OpenZeppelin ERC-20 with mint/burn capabilities controlled by the platform.
+2. **Genesis Pass ERC-721** — Tiered access pass NFTs. Three tiers (Gold, Silver, Bronze) with different minting costs and AI hub access levels.
+3. **Staking Pool** — Stake FRX, earn rewards. Configurable APY with lock period incentives. Directly integrated with the frontend.
+4. **Lottery** — Chainlink VRF-powered verifiable randomness. NFT-gated entry with FRX burn mechanic.
+5. **Crystal Forge** — Gamified token sink. Burn FRX + NFTs to "forge" upgraded items with provably rare outcomes.
+
+## The Hardest Part: Frontend Integration
+
+Smart contracts are the easy part. The real challenge is making them feel like a normal web app. Users shouldn't need to understand gas fees, transaction confirmations, or block times — they should click a button and see a result.
+
+RainbowKit + wagmi v2 make this possible. Wallet connection is seamless. Transaction states (pending → confirming → confirmed) are displayed with clear UI feedback. The entire dApp feels responsive, not "blockchain-slow."
+
+## What I Learned
+
+1. **Test on Sepolia extensively before even thinking about mainnet.** Gas is free, errors are cheap.
+2. **Verify your contracts on Etherscan.** It's one command with Hardhat, and it makes your project legitimate.
+3. **Tokenomics need sinks, not just sources.** Every token in the system needs a reason to be burned or spent — otherwise it's just a number going up until it doesn't.
+4. **Chainlink VRF is worth the setup.** Verifiable randomness is essential for any lottery or game mechanic. Don't try to roll your own.

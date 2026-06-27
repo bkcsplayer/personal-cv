@@ -2,6 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "buildCommand": "tinacms build && next build",
+  "redirects": [
+    {
+      "source": "/blog/first-test1",
+      "destination": "/blog",
+      "permanent": true
+    }
+  ],
   "crons": [
     {
       "path": "/api/send-newsletter",

@@ -37,10 +37,7 @@ const stripMarkdown = (input: string): string =>
     .replace(/_{1,2}([^_]+)_{1,2}/g, "$1")
     .trim();
 
-const MONTHS = [
-  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const formatDate = (iso: string): string => {
   const d = new Date(iso);
@@ -76,7 +73,7 @@ const extractExcerpt = (content: string, maxChars = 420): string[] => {
   }
   if (current.length && paragraphs.length < 2) paragraphs.push(current.join(" "));
 
-  let kept = paragraphs.slice(0, 2).map(stripMarkdown).filter(Boolean);
+  const kept = paragraphs.slice(0, 2).map(stripMarkdown).filter(Boolean);
   // 控制总长度，超出则截断最后一段
   let total = 0;
   const out: string[] = [];

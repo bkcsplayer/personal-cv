@@ -9,6 +9,7 @@ import {
   SmartLink,
   Text,
 } from "@once-ui-system/core";
+import { fallbackImage } from "@/lib/ogImage";
 
 interface ProjectCardProps {
   href: string;
@@ -34,7 +35,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     <Column fillWidth gap="m">
       <Carousel
         sizes="(max-width: 960px) 100vw, 960px"
-        items={images.map((image) => ({
+        items={(images.length ? images : [fallbackImage(title)]).map((image) => ({
           slide: image,
           alt: title,
         }))}

@@ -21,6 +21,7 @@ import { Metadata } from "next";
 import React from "react";
 import { Posts } from "@/components/blog/Posts";
 import { ShareSection } from "@/components/blog/ShareSection";
+import { coverOrFallback } from "@/lib/ogImage";
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "blog", "posts"]);
@@ -120,19 +121,17 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
               </Text>
             </Row>
           </Row>
-          {post.metadata.image && (
-            <Media
-              src={post.metadata.image}
-              alt={post.metadata.title}
-              aspectRatio="16/9"
-              priority
-              sizes="(min-width: 768px) 100vw, 768px"
-              border="neutral-alpha-weak"
-              radius="l"
-              marginTop="12"
-              marginBottom="8"
-            />
-          )}
+          <Media
+            src={coverOrFallback(post.metadata.image, post.metadata.title)}
+            alt={post.metadata.title}
+            aspectRatio="16/9"
+            priority
+            sizes="(min-width: 768px) 100vw, 768px"
+            border="neutral-alpha-weak"
+            radius="l"
+            marginTop="12"
+            marginBottom="8"
+          />
           <Column as="article" maxWidth="s">
             <CustomMDX source={post.content} />
           </Column>

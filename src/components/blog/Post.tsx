@@ -3,6 +3,7 @@
 import { Card, Column, Media, Row, Avatar, Text } from "@once-ui-system/core";
 import { formatDate } from "@/utils/formatDate";
 import { person } from "@/resources";
+import { coverOrFallback } from "@/lib/ogImage";
 
 interface PostProps {
   post: any;
@@ -25,14 +26,14 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
       gap={direction === "column" ? undefined : "24"}
       s={{ direction: "column" }}
     >
-      {post.metadata.image && thumbnail && (
+      {thumbnail && (
         <Media
           priority
           sizes="(max-width: 768px) 100vw, 640px"
           border="neutral-alpha-weak"
           cursor="interactive"
           radius="l"
-          src={post.metadata.image}
+          src={coverOrFallback(post.metadata.image, post.metadata.title)}
           alt={"Thumbnail of " + post.metadata.title}
           aspectRatio="16 / 9"
         />

@@ -110,7 +110,10 @@ const extractSections = (content: string, max = 5): string[] => {
 export function buildPostEmailHtml(post: NewsletterPost, baseURL: string): string {
   const postUrl = `${baseURL}/blog/${post.slug}`;
   const title = escapeHtml(post.title);
-  const cover = post.image ? toAbsoluteUrl(post.image, baseURL) : "";
+  // 有封面用封面，没有则回退到动态标题卡（保证邮件永远有图）
+  const cover = post.image
+    ? toAbsoluteUrl(post.image, baseURL)
+    : `${baseURL}/api/og/generate?title=${encodeURIComponent(post.title)}`;
   const body = post.content ?? "";
 
   const dateStr = formatDate(post.publishedAt);

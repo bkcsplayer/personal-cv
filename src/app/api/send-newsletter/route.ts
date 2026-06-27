@@ -71,6 +71,7 @@ export async function GET(req: Request): Promise<NextResponse> {
         summary: post.metadata.summary,
         image: post.metadata.image,
         publishedAt: post.metadata.publishedAt,
+        content: post.content,
       },
       baseURL,
     );

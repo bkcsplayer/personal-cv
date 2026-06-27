@@ -60,9 +60,7 @@ const home: Home = {
     <>
       I'm {person.firstName}, a {person.role.toLowerCase()} based in Calgary, Canada.
       <br />
-      Founder of FutureFrontier Technology Ltd and Khtain Block Technology Ltd.
-      <br />I build production SaaS, Web3 platforms, AI pipelines, and trading systems — this is
-      where they live.
+      Founder of FutureFrontier Technology Ltd — building SaaS, Web3, AI & trading systems.
     </>
   ),
 };
@@ -90,7 +88,7 @@ const about: About = {
       <>
         I'm Cool Bao, a Calgary-based Full-Stack Developer and Entrepreneur. I build
         production-grade SaaS tools, Web3 platforms, AI pipelines, and automated trading systems. As
-        founder of FutureFrontier Technology Ltd and Khtain Block Technology Ltd, I ship products
+        founder of FutureFrontier Technology Ltd, I ship products
         that solve real business problems — from EV charger quoting to solar CRM, from AI content
         factories to prediction market trading engines. This site is the living wall of everything I
         build.
@@ -102,7 +100,7 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FutureFrontier Technology Ltd / Khtain Block Technology Ltd",
+        company: "FutureFrontier Technology Ltd",
         timeframe: "2023 - Present",
         role: "Founder & Full-Stack Developer",
         achievements: [

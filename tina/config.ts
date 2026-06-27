@@ -9,6 +9,10 @@ const branch =
   process.env.VERCEL_GIT_COMMIT_REF ||
   "main";
 
+// Tina Cloud 内容搜索的索引 token（在 Tina Cloud 后台 → 项目 → Tokens 生成）。
+// 没设时不启用 search，避免构建/本地报错。
+const searchToken = process.env.TINA_SEARCH_TOKEN || "";
+
 export default defineConfig({
   branch,
   // Leave empty for local mode (tinacms dev). Fill in to use Tina Cloud later.
@@ -25,6 +29,18 @@ export default defineConfig({
       publicFolder: "public",
     },
   },
+
+  // 内容搜索（仅 Tina Cloud 支持）。token 缺失时为 undefined = 不启用。
+  search: searchToken
+    ? {
+        tina: {
+          indexerToken: searchToken,
+          stopwordLanguages: ["eng"],
+        },
+        indexBatchSize: 100,
+        maxSearchIndexFieldLength: 100,
+      }
+    : undefined,
 
   schema: {
     collections: [

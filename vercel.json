@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "buildCommand": "tinacms build && next build",
+  "buildCommand": "tinacms build --skip-cloud-checks && next build",
   "redirects": [
     {
       "source": "/blog/first-test1",
